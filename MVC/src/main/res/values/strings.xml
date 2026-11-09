@@ -1,3 +1,9 @@
 <resources>
-    <string name="app_name">MVC</string>
+    <string name="app_name" translatable="false">MVC</string>
+    <string name="city_label">City:</string>
+    <string name="city_hint">e.g. Beijing</string>
+    <string name="query">Query</string>
+    <string name="loading">Loading…</string>
+    <string name="success">Loaded</string>
+    <string name="failure">Failed to load (is the city empty?)</string>
 </resources>
