@@ -6,7 +6,17 @@ One screen, three architectures. `MVC/`, `MVP/` and `MVVM/` are three independen
 
 - Version 2.0.0, minSdk 23, targetSdk 36, Kotlin, coroutines, AppCompat DayNight (no Material Components).
 - Package names: `com.wx.mvc`, `com.wx.mvp`, `com.wx.mvvm`.
-- Data is **simulated** with a coroutine `delay` (2 s). An empty city fails, anything else returns fixed data. There is no real network call.
+- Data is **simulated** with a coroutine `delay` (2 s). An empty city fails (or turn on the "Simulate failure" switch), anything else returns fixed data. There is no real network call.
+
+## ScreenShot
+
+<img src="screenshot/demo.gif" width="300" alt="MVX demo" />
+
+| | Home | Home (dark) | Success | Failure | Success (dark) |
+|:---:|:---:|:---:|:---:|:---:|:---:|
+| MVC | <img src="screenshot/mvc_home.png" width="200" /> | <img src="screenshot/mvc_home_dark.png" width="200" /> | <img src="screenshot/mvc_weather.png" width="200" /> | <img src="screenshot/mvc_weather_error.png" width="200" /> | <img src="screenshot/mvc_weather_dark.png" width="200" /> |
+| MVP | <img src="screenshot/mvp_home.png" width="200" /> | <img src="screenshot/mvp_home_dark.png" width="200" /> | <img src="screenshot/mvp_weather.png" width="200" /> | <img src="screenshot/mvp_weather_error.png" width="200" /> | <img src="screenshot/mvp_weather_dark.png" width="200" /> |
+| MVVM | <img src="screenshot/mvvm_home.png" width="200" /> | <img src="screenshot/mvvm_home_dark.png" width="200" /> | <img src="screenshot/mvvm_weather.png" width="200" /> | <img src="screenshot/mvvm_weather_error.png" width="200" /> | <img src="screenshot/mvvm_weather_dark.png" width="200" /> |
 
 ## The same business in three shapes
 
@@ -61,7 +71,7 @@ The 1.x MVVM module used DataBinding (XML expressions plus `BaseObservable`). 2.
 ```
 
 - MVP `WeatherPresenterTest` and MVVM `WeatherViewModelTest` are plain JVM tests (loading, success, failure sequences; MVP also covers detach and cancelling a previous query).
-- Each app has a Robolectric smoke test (launch, loading, success, empty-city failure).
+- Each app has Robolectric smoke tests (home and weather page in light and dark mode, theme toggle, loading, success, empty-city and simulated failure).
 
 ## Migration from 1.x
 
@@ -72,7 +82,15 @@ The 1.x MVVM module used DataBinding (XML expressions plus `BaseObservable`). 2.
 
 ## Maintenance
 
-Maintained as a small teaching demo. The apps have not been run on a real device by the automated checks.
+Maintained as a small teaching demo. The three apps were run on a real device (Xiaomi 2509FPN0BC, Android 17): home page, light / dark toggle, query success, "Simulate failure" and the pages above were checked by hand; the empty-city error and rotation were not checked on the device (covered by the unit tests only).
+
+## Credits
+
+The three apps bundle these fonts, both licensed under the [SIL Open Font License 1.1](https://openfontlicense.org) (license texts in [`MVC/licenses/`](MVC/licenses), [`MVP/licenses/`](MVP/licenses) and [`MVVM/licenses/`](MVVM/licenses)):
+* [Space Grotesk](https://github.com/floriankarsten/space-grotesk): Copyright 2020 The Space Grotesk Project Authors
+* [JetBrains Mono](https://github.com/JetBrains/JetBrainsMono): Copyright 2020 The JetBrains Mono Project Authors
+
+All icons are hand-drawn vectors; no bitmap assets are used.
 
 ## License
 

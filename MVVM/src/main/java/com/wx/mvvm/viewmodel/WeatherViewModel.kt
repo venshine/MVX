@@ -35,11 +35,11 @@ class WeatherViewModel(private val model: WeatherModel) : ViewModel() {
 
     private var job: Job? = null
 
-    fun query(city: String) {
+    fun query(city: String, simulateFailure: Boolean = false) {
         job?.cancel()
         job = viewModelScope.launch {
             _state.value = WeatherUiState.Loading
-            _state.value = model.getWeather(city).fold(
+            _state.value = model.getWeather(city, simulateFailure).fold(
                 onSuccess = { WeatherUiState.Success(it) },
                 onFailure = { WeatherUiState.Error },
             )

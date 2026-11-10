@@ -17,16 +17,16 @@ package com.wx.mvvm.view
 
 import android.os.Bundle
 import android.view.View
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import androidx.lifecycle.viewmodel.viewModelFactory
 import androidx.lifecycle.viewmodel.initializer
+import androidx.lifecycle.viewmodel.viewModelFactory
+import com.wx.mvvm.BaseActivity
+import com.wx.mvvm.Phase
 import com.wx.mvvm.R
+import com.wx.mvvm.applyPhase
 import com.wx.mvvm.databinding.LayoutWeatherBinding
 import com.wx.mvvm.model.impl.WeatherModelImpl
 import com.wx.mvvm.viewmodel.WeatherUiState
@@ -39,7 +39,7 @@ import kotlinx.coroutines.launch
  *
  * @author venshine
  */
-class WeatherActivity : AppCompatActivity() {
+class WeatherActivity : BaseActivity() {
 
     private lateinit var binding: LayoutWeatherBinding
 
@@ -54,14 +54,10 @@ class WeatherActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = LayoutWeatherBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        val root = binding.root
-        // targetSdk 35+ 强制 edge-to-edge，给根布局补上左右和底部的系统栏边距
-        ViewCompat.setOnApplyWindowInsetsListener(root) { v, insets ->
-            val bars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(bars.left, 0, bars.right, bars.bottom)
-            insets
+        setToolbar(R.string.weather_title, "MVVM")
+        binding.queryButton.setOnClickListener {
+            viewModel.query(binding.cityEdit.text.toString(), binding.failSwitch.isChecked)
         }
-        binding.queryButton.setOnClickListener { viewModel.query(binding.cityEdit.text.toString()) }
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.state.collect(::render)
@@ -70,32 +66,25 @@ class WeatherActivity : AppCompatActivity() {
     }
 
     private fun render(state: WeatherUiState) {
-        binding.progress.visibility = if (state is WeatherUiState.Loading) View.VISIBLE else View.GONE
-        when (state) {
-            WeatherUiState.Idle -> {
-                binding.status.text = ""
-                clearWeather()
-            }
-            WeatherUiState.Loading -> {
-                binding.status.setText(R.string.loading)
-                clearWeather()
-            }
-            is WeatherUiState.Success -> {
-                binding.status.setText(R.string.success)
-                binding.city.text = state.info.city
-                binding.temp.text = state.info.temp
-                binding.weather.text = state.info.weather
-            }
-            WeatherUiState.Error -> {
-                binding.status.setText(R.string.failure)
-                clearWeather()
-            }
+        val phase = when (state) {
+            WeatherUiState.Idle -> Phase.IDLE
+            WeatherUiState.Loading -> Phase.LOADING
+            is WeatherUiState.Success -> Phase.SUCCESS
+            WeatherUiState.Error -> Phase.ERROR
         }
-    }
-
-    private fun clearWeather() {
-        binding.city.text = ""
-        binding.temp.text = ""
-        binding.weather.text = ""
+        binding.progress.visibility = if (phase == Phase.LOADING) View.VISIBLE else View.GONE
+        binding.status.setText(
+            when (phase) {
+                Phase.IDLE -> R.string.idle
+                Phase.LOADING -> R.string.loading
+                Phase.SUCCESS -> R.string.success
+                Phase.ERROR -> R.string.failure
+            },
+        )
+        applyPhase(binding.statusCard, binding.statusDot, binding.stateTag, phase)
+        val info = (state as? WeatherUiState.Success)?.info
+        binding.city.text = info?.city.orEmpty()
+        binding.temp.text = info?.temp.orEmpty()
+        binding.weather.text = info?.weather.orEmpty()
     }
 }

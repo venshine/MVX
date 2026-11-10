@@ -1,8 +1,29 @@
 <resources>
-    <string name="city_label">城市：</string>
+    <string name="back">返回</string>
+    <string name="theme_to_dark">切换到深色模式</string>
+    <string name="theme_to_light">切换到浅色模式</string>
+    <string name="view_source">查看源码</string>
+    <string name="home_eyebrow">ANDROID · 架构对照</string>
+    <string name="home_title">逻辑都交给\nPresenter</string>
+    <string name="home_desc">View 只负责展示：实现 WeatherView 接口并转发点击。Presenter 调用 Model，再通过接口驱动 View，自身不依赖 Android 框架。</string>
+    <string name="home_preview">职责划分</string>
+    <string name="role_view_desc">WeatherActivity 实现 WeatherView：展示状态、转发点击</string>
+    <string name="role_mid_desc">WeatherPresenter：调用 Model，经接口驱动 View</string>
+    <string name="role_model_desc">WeatherModel：挂起函数查询，返回 Result</string>
+    <string name="home_demos">演示</string>
+    <string name="home_demos_hint">三个 App 的界面完全一致</string>
+    <string name="demo_weather">天气查询</string>
+    <string name="demo_weather_desc">加载中 / 成功 / 失败三种状态，可开关模拟失败</string>
+    <string name="home_footer">Apache-2.0 · © venshine</string>
+    <string name="weather_title">天气查询</string>
+    <string name="city_label">城市</string>
     <string name="city_hint">例如：北京</string>
+    <string name="city_default">北京</string>
+    <string name="simulate_failure">模拟失败</string>
+    <string name="simulate_failure_hint">下一次查询会在延迟后失败</string>
     <string name="query">查询</string>
+    <string name="idle">就绪，点击查询</string>
     <string name="loading">加载中…</string>
     <string name="success">加载成功</string>
-    <string name="failure">加载失败（城市是否为空？）</string>
+    <string name="failure">加载失败（城市为空或模拟失败）</string>
 </resources>

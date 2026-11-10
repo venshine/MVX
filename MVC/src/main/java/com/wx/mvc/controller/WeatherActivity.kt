@@ -21,14 +21,16 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ProgressBar
 import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
+import androidx.appcompat.widget.SwitchCompat
 import androidx.lifecycle.lifecycleScope
+import com.wx.mvc.BaseActivity
+import com.wx.mvc.Phase
 import com.wx.mvc.R
+import com.wx.mvc.applyPhase
 import com.wx.mvc.model.WeatherModel
 import com.wx.mvc.model.entity.WeatherInfo
 import com.wx.mvc.model.impl.WeatherModelImpl
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
 /**
@@ -38,12 +40,17 @@ import kotlinx.coroutines.launch
  *
  * @author venshine
  */
-class WeatherActivity : AppCompatActivity() {
+class WeatherActivity : BaseActivity() {
 
     private val model: WeatherModel = WeatherModelImpl()
+    private var job: Job? = null
 
     private lateinit var cityEdit: EditText
+    private lateinit var failSwitch: SwitchCompat
     private lateinit var progress: ProgressBar
+    private lateinit var statusCard: View
+    private lateinit var statusDot: View
+    private lateinit var stateTag: TextView
     private lateinit var status: TextView
     private lateinit var city: TextView
     private lateinit var temp: TextView
@@ -52,47 +59,52 @@ class WeatherActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.layout_weather)
-        val root = findViewById<View>(R.id.root)
-        // targetSdk 35+ 强制 edge-to-edge，给根布局补上左右和底部的系统栏边距
-        ViewCompat.setOnApplyWindowInsetsListener(root) { v, insets ->
-            val bars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(bars.left, 0, bars.right, bars.bottom)
-            insets
-        }
+        setToolbar(R.string.weather_title, "MVC")
         cityEdit = findViewById(R.id.city_edit)
+        failSwitch = findViewById(R.id.fail_switch)
         progress = findViewById(R.id.progress)
+        statusCard = findViewById(R.id.status_card)
+        statusDot = findViewById(R.id.status_dot)
+        stateTag = findViewById(R.id.state_tag)
         status = findViewById(R.id.status)
         city = findViewById(R.id.city)
         temp = findViewById(R.id.temp)
         weather = findViewById(R.id.weather)
         findViewById<Button>(R.id.query_button).setOnClickListener { query() }
+        showIdle()
     }
 
     private fun query() {
+        job?.cancel()
         showLoading()
-        lifecycleScope.launch {
-            model.getWeather(cityEdit.text.toString()).fold(::showWeather) { showError() }
+        val simulateFailure = failSwitch.isChecked
+        job = lifecycleScope.launch {
+            model.getWeather(cityEdit.text.toString(), simulateFailure).fold(::showWeather) { showError() }
         }
     }
 
+    private fun showIdle() {
+        render(Phase.IDLE, R.string.idle, null)
+    }
+
     private fun showLoading() {
-        progress.visibility = View.VISIBLE
-        status.setText(R.string.loading)
-        city.text = ""
-        temp.text = ""
-        weather.text = ""
+        render(Phase.LOADING, R.string.loading, null)
     }
 
     private fun showWeather(info: WeatherInfo) {
-        progress.visibility = View.GONE
-        status.setText(R.string.success)
-        city.text = info.city
-        temp.text = info.temp
-        weather.text = info.weather
+        render(Phase.SUCCESS, R.string.success, info)
     }
 
     private fun showError() {
-        progress.visibility = View.GONE
-        status.setText(R.string.failure)
+        render(Phase.ERROR, R.string.failure, null)
+    }
+
+    private fun render(phase: Phase, message: Int, info: WeatherInfo?) {
+        progress.visibility = if (phase == Phase.LOADING) View.VISIBLE else View.GONE
+        status.setText(message)
+        applyPhase(statusCard, statusDot, stateTag, phase)
+        city.text = info?.city.orEmpty()
+        temp.text = info?.temp.orEmpty()
+        weather.text = info?.weather.orEmpty()
     }
 }

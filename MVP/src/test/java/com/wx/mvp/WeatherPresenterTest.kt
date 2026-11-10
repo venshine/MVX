@@ -43,7 +43,7 @@ class WeatherPresenterTest {
     }
 
     private class FakeModel(val result: Result<WeatherInfo>, val delayMillis: Long = 1000) : WeatherModel {
-        override suspend fun getWeather(city: String): Result<WeatherInfo> {
+        override suspend fun getWeather(city: String, simulateFailure: Boolean): Result<WeatherInfo> {
             delay(delayMillis)
             return result
         }

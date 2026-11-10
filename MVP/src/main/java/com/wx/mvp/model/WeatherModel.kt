@@ -19,5 +19,6 @@ import com.wx.mvp.model.entity.WeatherInfo
 
 /** 天气数据源；失败以 Result.failure 返回，不抛异常给调用方 */
 interface WeatherModel {
-    suspend fun getWeather(city: String): Result<WeatherInfo>
+    /** @param simulateFailure 演示开关：为 true 时即使城市有效也返回失败，用来观察失败状态 */
+    suspend fun getWeather(city: String, simulateFailure: Boolean = false): Result<WeatherInfo>
 }

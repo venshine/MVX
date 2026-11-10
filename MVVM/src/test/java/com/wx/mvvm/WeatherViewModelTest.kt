@@ -43,7 +43,7 @@ class WeatherViewModelTest {
     private val info = WeatherInfo("北京", "18度-25度", "多云转晴")
 
     private class FakeModel(val result: Result<WeatherInfo>) : WeatherModel {
-        override suspend fun getWeather(city: String): Result<WeatherInfo> {
+        override suspend fun getWeather(city: String, simulateFailure: Boolean): Result<WeatherInfo> {
             delay(1000)
             return result
         }

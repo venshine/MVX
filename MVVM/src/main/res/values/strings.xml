@@ -1,9 +1,34 @@
 <resources>
     <string name="app_name" translatable="false">MVVM</string>
-    <string name="city_label">City:</string>
+    <string name="home_flow" translatable="false">View &lt;- ViewModel -&gt; Model</string>
+    <string name="role_view" translatable="false">VIEW</string>
+    <string name="role_mid" translatable="false">VIEWMODEL</string>
+    <string name="role_model" translatable="false">MODEL</string>
+    <string name="back">Back</string>
+    <string name="theme_to_dark">Switch to dark mode</string>
+    <string name="theme_to_light">Switch to light mode</string>
+    <string name="view_source">View source</string>
+    <string name="home_eyebrow">ANDROID · ARCHITECTURE</string>
+    <string name="home_title">State flows down,\nevents flow up</string>
+    <string name="home_desc">The ViewModel exposes a StateFlow of UI state. The View only renders it, and the state survives rotation.</string>
+    <string name="home_preview">Who does what</string>
+    <string name="role_view_desc">WeatherActivity: collects the state and renders it</string>
+    <string name="role_mid_desc">WeatherViewModel: StateFlow&lt;WeatherUiState>, no View reference</string>
+    <string name="role_model_desc">WeatherModel: suspend query that returns a Result</string>
+    <string name="home_demos">Demo</string>
+    <string name="home_demos_hint">Same screen in all three apps</string>
+    <string name="demo_weather">Weather query</string>
+    <string name="demo_weather_desc">Loading, success and failure, with a switch to force failure</string>
+    <string name="home_footer">Apache-2.0 · © venshine</string>
+    <string name="weather_title">Weather</string>
+    <string name="city_label">CITY</string>
     <string name="city_hint">e.g. Beijing</string>
+    <string name="city_default">Beijing</string>
+    <string name="simulate_failure">Simulate failure</string>
+    <string name="simulate_failure_hint">The next query fails after the delay</string>
     <string name="query">Query</string>
+    <string name="idle">Ready. Tap Query.</string>
     <string name="loading">Loading…</string>
     <string name="success">Loaded</string>
-    <string name="failure">Failed to load (is the city empty?)</string>
+    <string name="failure">Failed to load (empty city or simulated failure)</string>
 </resources>

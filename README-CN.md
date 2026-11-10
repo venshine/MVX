@@ -6,7 +6,17 @@
 
 - 版本 2.0.0，minSdk 23，targetSdk 36，Kotlin，协程，AppCompat DayNight（不使用 Material Components）。
 - 包名：`com.wx.mvc`、`com.wx.mvp`、`com.wx.mvvm`。
-- 数据**纯模拟**：协程 `delay`（2 秒）后，城市为空则失败，否则返回固定数据，不接真实网络接口。
+- 数据**纯模拟**：协程 `delay`（2 秒）后，城市为空（或打开「模拟失败」开关）则失败，否则返回固定数据，不接真实网络接口。
+
+## 截图
+
+<img src="screenshot/demo.gif" width="300" alt="MVX demo" />
+
+| | 首页 | 首页（深色） | 成功 | 失败 | 成功（深色） |
+|:---:|:---:|:---:|:---:|:---:|:---:|
+| MVC | <img src="screenshot/mvc_home.png" width="200" /> | <img src="screenshot/mvc_home_dark.png" width="200" /> | <img src="screenshot/mvc_weather.png" width="200" /> | <img src="screenshot/mvc_weather_error.png" width="200" /> | <img src="screenshot/mvc_weather_dark.png" width="200" /> |
+| MVP | <img src="screenshot/mvp_home.png" width="200" /> | <img src="screenshot/mvp_home_dark.png" width="200" /> | <img src="screenshot/mvp_weather.png" width="200" /> | <img src="screenshot/mvp_weather_error.png" width="200" /> | <img src="screenshot/mvp_weather_dark.png" width="200" /> |
+| MVVM | <img src="screenshot/mvvm_home.png" width="200" /> | <img src="screenshot/mvvm_home_dark.png" width="200" /> | <img src="screenshot/mvvm_weather.png" width="200" /> | <img src="screenshot/mvvm_weather_error.png" width="200" /> | <img src="screenshot/mvvm_weather_dark.png" width="200" /> |
 
 ## 同一业务的三种写法
 
@@ -61,7 +71,7 @@ MVVM  点击 -> Activity -> ViewModel -> Model        Model -> ViewModel -> Stat
 ```
 
 - MVP 的 `WeatherPresenterTest`、MVVM 的 `WeatherViewModelTest` 是纯 JVM 测试（加载中、成功、失败的状态序列；MVP 还覆盖解绑和取消上一次查询）。
-- 三个 App 各有一个 Robolectric 冒烟测试（启动、加载中、成功、城市为空时失败）。
+- 三个 App 各有 Robolectric 冒烟测试（首页和天气页的深浅色启动、主题切换、加载中、成功、城市为空和模拟失败）。
 
 ## 从 1.x 迁移
 
@@ -72,7 +82,15 @@ MVVM  点击 -> Activity -> ViewModel -> Model        Model -> ViewModel -> Stat
 
 ## 维护状态
 
-作为小型教学演示低频维护。自动化检查没有在真机上运行过这三个 App。
+作为小型教学演示低频维护。三个 App 已在真机（小米 2509FPN0BC，Android 17）上手动检查：首页、深浅色切换、查询成功、「模拟失败」及上图各页；空城市报错和旋转未在真机上检查（仅有单元测试覆盖）。
+
+## 致谢
+
+三个 App 内置以下字体，均采用 [SIL Open Font License 1.1](https://openfontlicense.org)（协议原文见 [`MVC/licenses/`](MVC/licenses)、[`MVP/licenses/`](MVP/licenses)、[`MVVM/licenses/`](MVVM/licenses)）：
+* [Space Grotesk](https://github.com/floriankarsten/space-grotesk)：Copyright 2020 The Space Grotesk Project Authors
+* [JetBrains Mono](https://github.com/JetBrains/JetBrainsMono)：Copyright 2020 The JetBrains Mono Project Authors
+
+所有图标均为自绘矢量，不使用位图素材。
 
 ## 许可证
 

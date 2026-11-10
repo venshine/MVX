@@ -21,10 +21,11 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ProgressBar
 import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
+import androidx.appcompat.widget.SwitchCompat
+import com.wx.mvp.BaseActivity
+import com.wx.mvp.Phase
 import com.wx.mvp.R
+import com.wx.mvp.applyPhase
 import com.wx.mvp.model.entity.WeatherInfo
 import com.wx.mvp.model.impl.WeatherModelImpl
 import com.wx.mvp.presenter.WeatherPresenter
@@ -35,12 +36,16 @@ import kotlinx.coroutines.Dispatchers
  *
  * @author venshine
  */
-class WeatherActivity : AppCompatActivity(), WeatherView {
+class WeatherActivity : BaseActivity(), WeatherView {
 
     private val presenter = WeatherPresenter(WeatherModelImpl(), Dispatchers.Main.immediate)
 
     private lateinit var cityEdit: EditText
+    private lateinit var failSwitch: SwitchCompat
     private lateinit var progress: ProgressBar
+    private lateinit var statusCard: View
+    private lateinit var statusDot: View
+    private lateinit var stateTag: TextView
     private lateinit var status: TextView
     private lateinit var city: TextView
     private lateinit var temp: TextView
@@ -49,23 +54,22 @@ class WeatherActivity : AppCompatActivity(), WeatherView {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.layout_weather)
-        val root = findViewById<View>(R.id.root)
-        // targetSdk 35+ 强制 edge-to-edge，给根布局补上左右和底部的系统栏边距
-        ViewCompat.setOnApplyWindowInsetsListener(root) { v, insets ->
-            val bars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(bars.left, 0, bars.right, bars.bottom)
-            insets
-        }
+        setToolbar(R.string.weather_title, "MVP")
         cityEdit = findViewById(R.id.city_edit)
+        failSwitch = findViewById(R.id.fail_switch)
         progress = findViewById(R.id.progress)
+        statusCard = findViewById(R.id.status_card)
+        statusDot = findViewById(R.id.status_dot)
+        stateTag = findViewById(R.id.state_tag)
         status = findViewById(R.id.status)
         city = findViewById(R.id.city)
         temp = findViewById(R.id.temp)
         weather = findViewById(R.id.weather)
         findViewById<Button>(R.id.query_button).setOnClickListener {
-            presenter.getWeather(cityEdit.text.toString())
+            presenter.getWeather(cityEdit.text.toString(), failSwitch.isChecked)
         }
         presenter.attach(this)
+        render(Phase.IDLE, R.string.idle, null)
     }
 
     override fun onDestroy() {
@@ -74,23 +78,23 @@ class WeatherActivity : AppCompatActivity(), WeatherView {
     }
 
     override fun showLoading() {
-        progress.visibility = View.VISIBLE
-        status.setText(R.string.loading)
-        city.text = ""
-        temp.text = ""
-        weather.text = ""
+        render(Phase.LOADING, R.string.loading, null)
     }
 
     override fun showWeather(info: WeatherInfo) {
-        progress.visibility = View.GONE
-        status.setText(R.string.success)
-        city.text = info.city
-        temp.text = info.temp
-        weather.text = info.weather
+        render(Phase.SUCCESS, R.string.success, info)
     }
 
     override fun showError() {
-        progress.visibility = View.GONE
-        status.setText(R.string.failure)
+        render(Phase.ERROR, R.string.failure, null)
+    }
+
+    private fun render(phase: Phase, message: Int, info: WeatherInfo?) {
+        progress.visibility = if (phase == Phase.LOADING) View.VISIBLE else View.GONE
+        status.setText(message)
+        applyPhase(statusCard, statusDot, stateTag, phase)
+        city.text = info?.city.orEmpty()
+        temp.text = info?.temp.orEmpty()
+        weather.text = info?.weather.orEmpty()
     }
 }

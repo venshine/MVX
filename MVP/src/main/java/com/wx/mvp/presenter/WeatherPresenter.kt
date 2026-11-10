@@ -48,11 +48,11 @@ class WeatherPresenter(
         view = null
     }
 
-    fun getWeather(city: String) {
+    fun getWeather(city: String, simulateFailure: Boolean = false) {
         job?.cancel()
         view?.showLoading()
         job = scope.launch {
-            model.getWeather(city).fold(
+            model.getWeather(city, simulateFailure).fold(
                 onSuccess = { view?.showWeather(it) },
                 onFailure = { view?.showError() },
             )

@@ -20,14 +20,16 @@ import com.wx.mvc.model.entity.WeatherInfo
 import kotlinx.coroutines.delay
 
 /**
- * 模拟天气查询：延迟 [delayMillis] 毫秒后，城市为空则失败，否则返回固定数据。
+ * 模拟天气查询：延迟 [delayMillis] 毫秒后，城市为空或要求模拟失败则失败，否则返回固定数据。
  * 不接真实网络接口；测试里把延迟设为 0 或换成自己的实现即可。
  */
 class WeatherModelImpl(private val delayMillis: Long = 2000) : WeatherModel {
 
-    override suspend fun getWeather(city: String): Result<WeatherInfo> {
+    override suspend fun getWeather(city: String, simulateFailure: Boolean): Result<WeatherInfo> {
         delay(delayMillis)
-        return if (city.isBlank()) {
+        return if (simulateFailure) {
+            Result.failure(IllegalStateException("simulated failure"))
+        } else if (city.isBlank()) {
             Result.failure(IllegalArgumentException("city is blank"))
         } else {
             Result.success(WeatherInfo(city, "18度-25度", "多云转晴"))

@@ -13,7 +13,7 @@ The generic steps live in the global `release-seal` skill. This file only record
 ./gradlew testDebugUnitTest assembleDebug lintDebug
 ```
 
-Also run the three apps on a real device once: query a city (loading, then result) and query with an empty city (error).
+Also run the three apps on a real device once: query a city (loading, then result), query with an empty city (error), turn on "Simulate failure" (error), and toggle light / dark mode on the home page.
 
 ## Tag
 
@@ -22,7 +22,7 @@ Also run the three apps on a real device once: query a city (loading, then resul
 ## GitHub Release
 
 - Title is the version number; notes in English.
-- Attachments (optional): `MVC-X.Y.Z.apk`, `MVP-X.Y.Z.apk`, `MVVM-X.Y.Z.apk`, from `./gradlew assembleDebug` (`<module>/build/outputs/apk/debug/<module>-debug.apk`), signed with the local debug certificate.
+- Attachments (optional): `MVX-MVC-sample-X.Y.Z.apk`, `MVX-MVP-sample-X.Y.Z.apk`, `MVX-MVVM-sample-X.Y.Z.apk` (pattern `<Repo>-sample-X.Y.Z.apk` with the module name added), from `./gradlew assembleDebug` (`<module>/build/outputs/apk/debug/<module>-debug.apk`), signed with the local debug certificate.
 
 ## Afterwards
 
