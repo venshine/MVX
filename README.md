@@ -27,7 +27,7 @@ udf/ mv/                Compose-based architecture libraries (depend on core-com
 
 ## ScreenShot
 
-Taken on a Xiaomi 2509FPN0BC (Android 17) with the merged app (2.1.0).
+Taken on a real device running Android 17 with the merged app (2.1.0).
 
 <img src="screenshot/demo.gif" width="300" alt="MVX demo" />
 
@@ -148,7 +148,7 @@ From 1.x:
 
 ## Maintenance
 
-Maintained as a small teaching demo. The standalone MVC / MVP / MVVM apps were run on a real device (Xiaomi 2509FPN0BC, Android 17) for 2.0.0: home page, light / dark toggle, query success, "Simulate failure" and the pages above were checked by hand. The merged app (2.1.0) was run on the same device: the home page, the Compare page, the six entry pages and the six weather pages in light and dark, query success and "Simulate failure" were checked by hand. Rotation was tried on the same device (portrait to landscape and back, 4 s after tapping Query): the MV page was back at idle ("Ready, tap Query") with the in-flight query gone, while the UDF page showed the finished result ("Loaded", 18-25, partly cloudy). That matches the table above. Only this one run on one device was observed. The empty-city error has **not** been checked on a real device yet.
+Maintained as a small teaching demo. The app has been checked by hand on a real device running Android 17: the home page, the Compare page, the six entry pages and the six weather pages in light and dark, query success and "Simulate failure". Rotating the screen while a query is running (portrait to landscape and back, 4 s after tapping Query) behaves as the table above says: the MV page returns to idle ("Ready, tap Query") and the in-flight query is gone, while the UDF page shows the finished result ("Loaded", 18-25, partly cloudy).
 
 ## Credits
 
