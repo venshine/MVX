@@ -1,0 +1,12 @@
+<resources>
+    <string name="mv_name" translatable="false">MV</string>
+    <string name="mv_flow" translatable="false">Composable &lt;-&gt; state holder -&gt; Model</string>
+    <string name="mv_role_view" translatable="false">COMPOSABLE</string>
+    <string name="mv_role_mid" translatable="false">STATE HOLDER</string>
+    <string name="mv_role_model" translatable="false">MODEL</string>
+    <string name="mv_title">No ViewModel,\nstate stays in the UI</string>
+    <string name="mv_desc">State lives in remember / rememberSaveable next to the composable. Rotation is safe, but a query in flight is not kept. Fine for small screens.</string>
+    <string name="mv_role_view_desc">WeatherScreen: owns the holder via rememberSaveable</string>
+    <string name="mv_role_mid_desc">WeatherHolder: plain class with mutableStateOf, scope from the composition</string>
+    <string name="mv_role_model_desc">WeatherModel: suspend query that returns a Result</string>
+</resources>

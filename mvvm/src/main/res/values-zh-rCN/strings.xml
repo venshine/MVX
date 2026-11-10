@@ -1,0 +1,7 @@
+<resources>
+    <string name="mvvm_title">状态向下流，\n事件向上传</string>
+    <string name="mvvm_desc">ViewModel 暴露一个 UI 状态的 StateFlow，View 只负责渲染它，旋转屏幕后状态不丢。</string>
+    <string name="mvvm_role_view_desc">WeatherActivity：订阅状态并渲染</string>
+    <string name="mvvm_role_mid_desc">WeatherViewModel：StateFlow&lt;WeatherUiState>，不持有 View</string>
+    <string name="mvvm_role_model_desc">WeatherModel：挂起函数查询，返回 Result</string>
+</resources>

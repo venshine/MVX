@@ -1,0 +1,7 @@
+<resources>
+    <string name="mvp_title">逻辑都交给\nPresenter</string>
+    <string name="mvp_desc">View 只负责展示：实现 WeatherView 接口并转发点击。Presenter 调用 Model，再通过接口驱动 View，自身不依赖 Android 框架。</string>
+    <string name="mvp_role_view_desc">WeatherActivity 实现 WeatherView：展示状态、转发点击</string>
+    <string name="mvp_role_mid_desc">WeatherPresenter：调用 Model，经接口驱动 View</string>
+    <string name="mvp_role_model_desc">WeatherModel：挂起函数查询，返回 Result</string>
+</resources>

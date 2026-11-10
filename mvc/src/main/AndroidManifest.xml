@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <application>
+        <!-- 模块对外只暴露 MainActivity 这一个入口；theme 写在 Activity 上，库自己的单元测试也能直接启动 -->
+        <activity
+            android:name=".MainActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".controller.WeatherActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme" />
+    </application>
+
+</manifest>

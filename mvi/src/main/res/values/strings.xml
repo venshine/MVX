@@ -1,0 +1,13 @@
+<resources>
+    <string name="mvi_name" translatable="false">MVI</string>
+    <string name="mvi_flow" translatable="false">View -&gt; Intent -&gt; Reducer -&gt; State</string>
+    <string name="mvi_role_view" translatable="false">VIEW</string>
+    <string name="mvi_role_mid" translatable="false">REDUCER</string>
+    <string name="mvi_role_model" translatable="false">MODEL</string>
+    <string name="mvi_title">One state,\none way in</string>
+    <string name="mvi_desc">Every change enters as an Intent and passes through a pure Reducer, which produces the next immutable State. One-off events travel as Effects.</string>
+    <string name="mvi_role_view_desc">WeatherActivity: renders State, shows Effects, sends Intents</string>
+    <string name="mvi_role_mid_desc">WeatherViewModel + WeatherReducer: (State, Change) -&gt; State</string>
+    <string name="mvi_role_model_desc">WeatherModel: suspend query that returns a Result</string>
+    <string name="failure_toast">Query failed</string>
+</resources>

@@ -1,0 +1,50 @@
+plugins {
+    id 'com.android.application'
+}
+
+android {
+    namespace = 'com.wx.mvx'
+    compileSdk = 36
+
+    defaultConfig {
+        applicationId = 'com.wx.mvx'
+        minSdk = 23
+        targetSdk = 36
+        versionCode = 3
+        versionName = '2.1.0'
+    }
+    buildTypes {
+        release {
+            minifyEnabled = false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
+    }
+    testOptions {
+        unitTests.includeAndroidResources = true
+    }
+}
+
+dependencies {
+    implementation project(':core')
+    // Compose 架构库的入口类继承 core-compose 里的 ArchHomeActivity，编译 app 时类型要可见
+    implementation project(':core-compose')
+    // 六个架构库互不依赖，app 依赖全部六个，各自的入口 Activity 通过清单合并进来
+    implementation project(':mvc')
+    implementation project(':mvp')
+    implementation project(':mvvm')
+    implementation project(':mvi')
+    implementation project(':udf')
+    implementation project(':mv')
+
+    testImplementation platform('androidx.compose:compose-bom:2026.06.01')
+    testImplementation 'junit:junit:4.13.2'
+    testImplementation 'org.robolectric:robolectric:4.17'
+    testImplementation 'androidx.compose.ui:ui-test-junit4'
+    // 测试用的 ComponentActivity 由它的清单提供（仅 debug，不进 release）
+    debugImplementation platform('androidx.compose:compose-bom:2026.06.01')
+    debugImplementation 'androidx.compose.ui:ui-test-manifest'
+}

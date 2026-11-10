@@ -3,4 +3,6 @@
 plugins {
     id 'com.android.application' version '9.4.1' apply false
     id 'com.android.library' version '9.4.1' apply false
+    // 版本与 AGP 9.4.1 内置的 Kotlin 一致（2.2.10）
+    id 'org.jetbrains.kotlin.plugin.compose' version '2.2.10' apply false
 }

@@ -1,0 +1,12 @@
+<resources>
+    <string name="mvc_name" translatable="false">MVC</string>
+    <string name="mvc_flow" translatable="false">View &lt;-&gt; Controller -&gt; Model</string>
+    <string name="mvc_role_view" translatable="false">VIEW</string>
+    <string name="mvc_role_mid" translatable="false">CONTROLLER</string>
+    <string name="mvc_role_model" translatable="false">MODEL</string>
+    <string name="mvc_title">One Controller\nruns the show</string>
+    <string name="mvc_desc">The Activity is both View and Controller: it reads input, calls the Model and updates widgets directly. Simple, but the Activity grows fast.</string>
+    <string name="mvc_role_view_desc">layout_weather.xml: the widgets that show state</string>
+    <string name="mvc_role_mid_desc">WeatherActivity: reads input, calls the Model, updates the View</string>
+    <string name="mvc_role_model_desc">WeatherModel: suspend query that returns a Result</string>
+</resources>

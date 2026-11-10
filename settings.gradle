@@ -15,4 +15,6 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = 'MVX'
-include ':MVC', ':MVP', ':MVVM'
+// app 是唯一的可安装模块；core / core-compose 是共享模块；六个架构库互不依赖，只依赖共享模块
+include ':app', ':core', ':core-compose'
+include ':mvc', ':mvp', ':mvvm', ':mvi', ':udf', ':mv'

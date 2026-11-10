@@ -1,0 +1,12 @@
+<resources>
+    <string name="mvvm_name" translatable="false">MVVM</string>
+    <string name="mvvm_flow" translatable="false">View &lt;- ViewModel -&gt; Model</string>
+    <string name="mvvm_role_view" translatable="false">VIEW</string>
+    <string name="mvvm_role_mid" translatable="false">VIEWMODEL</string>
+    <string name="mvvm_role_model" translatable="false">MODEL</string>
+    <string name="mvvm_title">State flows down,\nevents flow up</string>
+    <string name="mvvm_desc">The ViewModel exposes a StateFlow of UI state. The View only renders it, and the state survives rotation.</string>
+    <string name="mvvm_role_view_desc">WeatherActivity: collects the state and renders it</string>
+    <string name="mvvm_role_mid_desc">WeatherViewModel: StateFlow&lt;WeatherUiState>, no View reference</string>
+    <string name="mvvm_role_model_desc">WeatherModel: suspend query that returns a Result</string>
+</resources>

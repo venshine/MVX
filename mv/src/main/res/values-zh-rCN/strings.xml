@@ -1,0 +1,7 @@
+<resources>
+    <string name="mv_title">没有 ViewModel，\n状态留在界面里</string>
+    <string name="mv_desc">状态放在可组合函数旁的 remember / rememberSaveable 里。旋转屏幕安全，但进行中的查询不会保留，适合小页面。</string>
+    <string name="mv_role_view_desc">WeatherScreen：通过 rememberSaveable 持有状态持有者</string>
+    <string name="mv_role_mid_desc">WeatherHolder：普通类 + mutableStateOf，协程作用域来自组合</string>
+    <string name="mv_role_model_desc">WeatherModel：挂起函数查询，返回 Result</string>
+</resources>

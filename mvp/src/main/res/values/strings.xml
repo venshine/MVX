@@ -1,0 +1,12 @@
+<resources>
+    <string name="mvp_name" translatable="false">MVP</string>
+    <string name="mvp_flow" translatable="false">View &lt;-&gt; Presenter -&gt; Model</string>
+    <string name="mvp_role_view" translatable="false">VIEW</string>
+    <string name="mvp_role_mid" translatable="false">PRESENTER</string>
+    <string name="mvp_role_model" translatable="false">MODEL</string>
+    <string name="mvp_title">The Presenter\nholds the logic</string>
+    <string name="mvp_desc">The View is passive: it implements WeatherView and forwards clicks. The Presenter talks to the Model and drives the View through that interface, with no Android dependency.</string>
+    <string name="mvp_role_view_desc">WeatherActivity implements WeatherView: shows state, forwards clicks</string>
+    <string name="mvp_role_mid_desc">WeatherPresenter: calls the Model, drives the View interface</string>
+    <string name="mvp_role_model_desc">WeatherModel: suspend query that returns a Result</string>
+</resources>

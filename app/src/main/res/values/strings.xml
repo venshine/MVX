@@ -1,0 +1,59 @@
+<resources>
+    <string name="app_name" translatable="false">MVX</string>
+    <string name="arch_mvc_name" translatable="false">MVC</string>
+    <string name="arch_mvp_name" translatable="false">MVP</string>
+    <string name="arch_mvvm_name" translatable="false">MVVM</string>
+    <string name="arch_mvi_name" translatable="false">MVI</string>
+    <string name="arch_udf_name" translatable="false">UDF</string>
+    <string name="arch_mv_name" translatable="false">MV</string>
+    <string name="tag_view" translatable="false">VIEW</string>
+    <string name="tag_compose" translatable="false">COMPOSE</string>
+    <string name="hub_title">Six ways to build\nthe same screen</string>
+    <string name="hub_desc">MVC, MVP, MVVM, MVI, UDF and MV all query the same simulated weather. Open one, then read its module next to the others.</string>
+    <string name="hub_section">Architectures</string>
+    <string name="hub_section_hint">Same screen, same Model</string>
+    <string name="compare_title">Compare</string>
+    <string name="compare_card_desc">Responsibilities, data flow, state, testability and when to use each</string>
+    <string name="compare_intro">Official pages define unidirectional data flow, UI state and state holders; MVC, MVP, MVVM, MVI and MV are community names.</string>
+    <string name="cmp_label_duty">RESPONSIBILITIES</string>
+    <string name="cmp_label_flow">DATA FLOW</string>
+    <string name="cmp_label_state">STATE LIVES IN</string>
+    <string name="cmp_label_test">TESTABILITY</string>
+    <string name="cmp_label_fits">FITS</string>
+    <string name="arch_mvc_tagline">The Activity is View and Controller at once</string>
+    <string name="cmp_mvc_duty">The Activity is both View and Controller: it reads input, calls the Model and updates the Views directly.</string>
+    <string name="cmp_mvc_flow">click -&gt; Activity -&gt; Model; Model -&gt; Activity -&gt; Views</string>
+    <string name="cmp_mvc_state">In the Views</string>
+    <string name="cmp_mvc_test">Robolectric (the logic is inside the Activity)</string>
+    <string name="cmp_mvc_fits">A tiny screen or a prototype</string>
+    <string name="arch_mvp_tagline">The Presenter holds the logic, the View is passive</string>
+    <string name="cmp_mvp_duty">The Activity (View) shows state and forwards clicks; the Presenter calls the Model and drives the View through an interface, with no Android dependency.</string>
+    <string name="cmp_mvp_flow">click -&gt; Activity -&gt; Presenter -&gt; Model; Model -&gt; Presenter -&gt; View interface -&gt; Activity</string>
+    <string name="cmp_mvp_state">In the Presenter and the Views</string>
+    <string name="cmp_mvp_test">Plain JVM: a fake View and a fake Model</string>
+    <string name="cmp_mvp_fits">Testable logic without Jetpack; existing MVP code</string>
+    <string name="arch_mvvm_tagline">The ViewModel exposes a StateFlow of UiState</string>
+    <string name="cmp_mvvm_duty">The Activity renders one UiState; the ViewModel calls the Model and exposes it as a StateFlow.</string>
+    <string name="cmp_mvvm_flow">click -&gt; Activity -&gt; ViewModel -&gt; Model; Model -&gt; ViewModel -&gt; StateFlow(UiState) -&gt; Activity renders</string>
+    <string name="cmp_mvvm_state">StateFlow in the ViewModel</string>
+    <string name="cmp_mvvm_test">Plain JVM: the ViewModel with a fake Model</string>
+    <string name="cmp_mvvm_fits">The default for View-based apps</string>
+    <string name="arch_mvi_tagline">One state, intents in, a pure reducer</string>
+    <string name="cmp_mvi_duty">One immutable State. Actions become Intents, a pure Reducer computes the next State, one-shot Effects go through a Channel (a community pattern, not an official term).</string>
+    <string name="cmp_mvi_flow">click -&gt; Intent -&gt; ViewModel -&gt; Change -&gt; Reducer -&gt; new State -&gt; Activity renders (+ Effect -&gt; Toast)</string>
+    <string name="cmp_mvi_state">One immutable State in the ViewModel\'s StateFlow</string>
+    <string name="cmp_mvi_test">Plain JVM: the Reducer without coroutines; the ViewModel with a fake Model</string>
+    <string name="cmp_mvi_fits">Complex screens with many events and one state to audit</string>
+    <string name="arch_udf_tagline">The official Compose shape: state down, events up</string>
+    <string name="cmp_udf_duty">The shape the official guide describes: the ViewModel exposes StateFlow&lt;UiState&gt;, a stateless content composable sits below the screen, events are method calls.</string>
+    <string name="cmp_udf_flow">click -&gt; onQuery -&gt; ViewModel.query() -&gt; Model; Model -&gt; StateFlow(UiState) -&gt; collectAsStateWithLifecycle -&gt; recompose</string>
+    <string name="cmp_udf_state">StateFlow&lt;UiState&gt; in the ViewModel</string>
+    <string name="cmp_udf_test">Plain JVM: the ViewModel with a fake Model</string>
+    <string name="cmp_udf_fits">The default for new Compose code</string>
+    <string name="arch_mv_tagline">State lives in a plain holder, no ViewModel</string>
+    <string name="cmp_mv_duty">No ViewModel: a plain state holder class kept by rememberSaveable, read directly by the composables (a community name, not an official term; not the official choice for screen-level state).</string>
+    <string name="cmp_mv_flow">click -&gt; onQuery -&gt; WeatherHolder.query() -&gt; Model; Model -&gt; mutableStateOf -&gt; recompose</string>
+    <string name="cmp_mv_state">mutableStateOf in a plain class kept by rememberSaveable</string>
+    <string name="cmp_mv_test">Plain JVM: the holder with a test scope</string>
+    <string name="cmp_mv_fits">Small, self-contained screens. A finished result survives rotation, a query in flight does not</string>
+</resources>

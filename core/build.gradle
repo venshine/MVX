@@ -1,0 +1,29 @@
+plugins {
+    id 'com.android.library'
+}
+
+android {
+    namespace = 'com.wx.mvx.core'
+    compileSdk = 36
+
+    defaultConfig {
+        minSdk = 23
+    }
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
+    }
+    buildFeatures {
+        viewBinding = true
+    }
+    testOptions {
+        unitTests.includeAndroidResources = true
+    }
+}
+
+dependencies {
+    // DayNight 主题切换走 AppCompatDelegate；各架构模块通过 core 获得这三项
+    api 'androidx.appcompat:appcompat:1.8.0'
+    api 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.11.0'
+    api 'androidx.lifecycle:lifecycle-runtime:2.10.0'
+}

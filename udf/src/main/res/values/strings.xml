@@ -1,0 +1,12 @@
+<resources>
+    <string name="udf_name" translatable="false">UDF</string>
+    <string name="udf_flow" translatable="false">UI &lt;- ViewModel -&gt; Model</string>
+    <string name="udf_role_view" translatable="false">COMPOSE UI</string>
+    <string name="udf_role_mid" translatable="false">VIEWMODEL</string>
+    <string name="udf_role_model" translatable="false">MODEL</string>
+    <string name="udf_title">State flows down,\nevents flow up</string>
+    <string name="udf_desc">The officially recommended shape in Compose: the ViewModel exposes a StateFlow of UiState, composables collect it and send events back as method calls.</string>
+    <string name="udf_role_view_desc">WeatherScreen: collectAsStateWithLifecycle, stateless content below</string>
+    <string name="udf_role_mid_desc">WeatherViewModel: StateFlow&lt;WeatherUiState&gt;, query() as the only event</string>
+    <string name="udf_role_model_desc">WeatherModel: suspend query that returns a Result</string>
+</resources>

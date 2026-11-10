@@ -1,0 +1,7 @@
+<resources>
+    <string name="udf_title">状态向下流，\n事件向上传</string>
+    <string name="udf_desc">Compose 下官方推荐的写法：ViewModel 暴露 UiState 的 StateFlow，可组合函数订阅它，事件以方法调用传回。</string>
+    <string name="udf_role_view_desc">WeatherScreen：collectAsStateWithLifecycle，下层是无状态内容</string>
+    <string name="udf_role_mid_desc">WeatherViewModel：StateFlow&lt;WeatherUiState&gt;，query() 是唯一事件</string>
+    <string name="udf_role_model_desc">WeatherModel：挂起函数查询，返回 Result</string>
+</resources>

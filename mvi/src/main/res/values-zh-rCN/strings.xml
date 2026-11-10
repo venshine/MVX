@@ -1,0 +1,8 @@
+<resources>
+    <string name="mvi_title">一个状态，\n一条入口</string>
+    <string name="mvi_desc">所有变化都以 Intent 进入，经过纯函数 Reducer 算出下一个不可变 State；一次性事件走 Effect。</string>
+    <string name="mvi_role_view_desc">WeatherActivity：渲染 State、展示 Effect、发出 Intent</string>
+    <string name="mvi_role_mid_desc">WeatherViewModel + WeatherReducer：(State, Change) -&gt; State</string>
+    <string name="mvi_role_model_desc">WeatherModel：挂起函数查询，返回 Result</string>
+    <string name="failure_toast">查询失败</string>
+</resources>
