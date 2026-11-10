@@ -8,6 +8,8 @@ One screen, three architectures. `MVC/`, `MVP/` and `MVVM/` are three independen
 - Package names: `com.wx.mvc`, `com.wx.mvp`, `com.wx.mvvm`.
 - Data is **simulated** with a coroutine `delay` (2 s). An empty city fails (or turn on the "Simulate failure" switch), anything else returns fixed data. There is no real network call.
 
+[**Download the sample APKs**](https://github.com/venshine/MVX/releases/tag/2.0.0) (MVC, MVP and MVVM)
+
 ## ScreenShot
 
 <img src="screenshot/demo.gif" width="300" alt="MVX demo" />

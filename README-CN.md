@@ -8,6 +8,8 @@
 - 包名：`com.wx.mvc`、`com.wx.mvp`、`com.wx.mvvm`。
 - 数据**纯模拟**：协程 `delay`（2 秒）后，城市为空（或打开「模拟失败」开关）则失败，否则返回固定数据，不接真实网络接口。
 
+[**下载示例 APK**](https://github.com/venshine/MVX/releases/tag/2.0.0)（MVC、MVP、MVVM 各一个）
+
 ## 截图
 
 <img src="screenshot/demo.gif" width="300" alt="MVX demo" />
